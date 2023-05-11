@@ -15,7 +15,7 @@ export const register = async (req, res) => {
   try {
     const {
       firstName,
-      lasName,
+      lastName,
       email,
       password,
       picturePath,
@@ -38,7 +38,7 @@ model likely represents a user in a database. The `password` property is set to 
 `bcrypt.hash()`. */
     const newUser = new User({
       firstName,
-      lasName,
+      lastName,
       email,
       password: passwordHash,
       picturePath,
@@ -76,7 +76,7 @@ model likely represents a user in a database. The `password` property is set to 
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ email, password });
+    const user = await User.findOne({ email: email });
 
     if (!user) return res.status(400).json({ msg: 'User does not exist.' });
 

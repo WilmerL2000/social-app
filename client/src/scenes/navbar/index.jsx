@@ -39,8 +39,7 @@ export default function Navbar() {
   const primaryLight = theme.palette.primary.light;
   const alt = theme.palette.background.alt;
 
-  // `${user.firstName} ${user.lastName}`;
-  const fullName = 'Wilmer Lopez';
+  const fullName = `${user.firstName} ${user.lastName}`;
 
   return (
     <FlexBetween padding="1rem 6%" backgroundColor={alt}>
