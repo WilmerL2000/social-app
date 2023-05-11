@@ -5,6 +5,6 @@ import { login } from '../controllers/auth.js';
 be used to define routes for handling HTTP requests. */
 const router = express.Router();
 
-router.post('/lgoin', login);
+router.post('/login', login);
 
 export default router;
