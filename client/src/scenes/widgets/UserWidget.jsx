@@ -21,6 +21,7 @@ import FlexBetween from '../../components/FlexBetween';
 import UserImage from '../../components/UserImage';
 import WidgetWrapper from '../../components/WidgetWrapper';
 import UserWidgetSkeleton from '../../components/Skeleton/UserWidgetSkeleton';
+import { BASE_URL } from '../../utils';
 
 const UserWidget = ({ userId, picturePath }) => {
   const isNonMobileScreens = useMediaQuery('(min-width: 1000px)');
@@ -37,7 +38,7 @@ const UserWidget = ({ userId, picturePath }) => {
    * This function retrieves user data from a server using a specified user ID and authorization token.
    */
   const getUser = async () => {
-    const response = await fetch(`http://localhost:3001/users/${userId}`, {
+    const response = await fetch(`${BASE_URL}/users/${userId}`, {
       method: 'GET',
       headers: { Authorization: `Bearer ${token}` },
     });

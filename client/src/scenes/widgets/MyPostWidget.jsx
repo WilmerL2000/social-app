@@ -20,6 +20,7 @@ import FlexBetween from '../../components/FlexBetween';
 import UserImage from '../../components/UserImage';
 import WidgetWrapper from '../../components/WidgetWrapper';
 import { setPosts } from '../../store';
+import { BASE_URL } from '../../utils';
 
 const MyPostWidget = ({ picturePath }) => {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ const MyPostWidget = ({ picturePath }) => {
       formData.append('picturePath', image.name);
     }
 
-    const response = await fetch(`http://localhost:3001/posts`, {
+    const response = await fetch(`${BASE_URL}/posts`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${token}` },
       body: formData,
