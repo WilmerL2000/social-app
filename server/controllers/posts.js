@@ -111,3 +111,27 @@ export const likePost = async (req, res) => {
     res.status(409).json({ message: error.message });
   }
 };
+
+/**
+ * This function adds a comment to a post and updates the post's comments field in a MongoDB database.
+ * @param req - req stands for request and it is an object that contains information about the HTTP
+ * request that was made, such as the request headers, request parameters, request body, etc. It is
+ * passed as the first parameter to the commentPost function.
+ * @param res - `res` is the response object that is used to send a response back to the client making
+ * the request. It contains methods such as `status` to set the HTTP status code of the response,
+ * `json` to send a JSON response, and many others.
+ */
+export const commentPost = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { comment } = req.body;
+
+    const updatedPost = await Post.findByIdAndUpdate(id, {
+      $push: { comments: comment },
+    });
+
+    res.status(201).json(updatedPost);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+};

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Friend from '../../components/Friend';
 import WidgetWrapper from '../../components/WidgetWrapper';
 import { setFriends } from '../../store';
+import { BASE_URL } from '../../utils';
 
 const FriendListWidget = ({ userId }) => {
   const dispatch = useDispatch();
@@ -16,13 +17,10 @@ const FriendListWidget = ({ userId }) => {
    * then dispatches the retrieved data to update the state.
    */
   const getFriends = async () => {
-    const response = await fetch(
-      `http://localhost:3001/users/${userId}/friends`,
-      {
-        method: 'GET',
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
+    const response = await fetch(`${BASE_URL}/users/${userId}/friends`, {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${token}` },
+    });
     const data = await response.json();
     dispatch(setFriends({ friends: data }));
   };
