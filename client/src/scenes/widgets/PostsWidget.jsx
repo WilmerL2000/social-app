@@ -40,7 +40,8 @@ const PostsWidget = ({ userId, isProfile = false }) => {
     } else {
       getPosts();
     }
-  }, []);
+  }, [posts]);
+
   return (
     <>
       {posts.map(
