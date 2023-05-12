@@ -1,10 +1,17 @@
 import {
   EditOutlined,
   LocationOnOutlined,
-  ManageAccountsOutlined,
   WorkOutlineOutlined,
+  AssignmentIndOutlined,
 } from '@mui/icons-material';
-import { Box, Divider, Typography, useTheme } from '@mui/material';
+import {
+  Box,
+  Divider,
+  IconButton,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -13,8 +20,11 @@ import Twitter from '../../assets/twitter.png';
 import FlexBetween from '../../components/FlexBetween';
 import UserImage from '../../components/UserImage';
 import WidgetWrapper from '../../components/WidgetWrapper';
+import UserWidgetSkeleton from '../../components/Skeleton/UserWidgetSkeleton';
 
 const UserWidget = ({ userId, picturePath }) => {
+  const isNonMobileScreens = useMediaQuery('(min-width: 1000px)');
+  const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   const [user, setUser] = useState(null);
   const { palette } = useTheme();
   const navigate = useNavigate();
@@ -39,8 +49,12 @@ const UserWidget = ({ userId, picturePath }) => {
     getUser();
   }, []);
 
+  useEffect(() => {
+    if (!isNonMobileScreens) setIsMobileMenuToggled((prev) => !prev);
+  }, [isNonMobileScreens]);
+
   if (!user) {
-    return null;
+    return <UserWidgetSkeleton />;
   }
 
   const {
@@ -55,91 +69,99 @@ const UserWidget = ({ userId, picturePath }) => {
 
   return (
     <WidgetWrapper>
-      <FlexBetween
-        gap="0.5rem"
-        pb="1.1rem"
-        onClick={() => navigate(`/profile/${userId}`)}
-      >
-        <FlexBetween gap="1rem">
-          <UserImage image={picturePath} />
-          <Box>
-            <Typography
-              variant="h4"
-              color={dark}
-              fontWeight="500"
-              sx={{
-                '&:hover': { color: palette.primary.light, cursor: 'pointer' },
-              }}
-            >
-              {firstName} {lastName}
-            </Typography>
-            <Typography color={medium}>{friends?.length} friends</Typography>
-          </Box>
+      <FlexBetween gap="0.5rem" pb="1.1rem">
+        <FlexBetween onClick={() => navigate(`/profile/${userId}`)}>
+          <FlexBetween gap="1rem">
+            <UserImage image={picturePath} />
+            <Box>
+              <Typography
+                variant="h4"
+                color={dark}
+                fontWeight="500"
+                sx={{
+                  '&:hover': {
+                    color: palette.primary.light,
+                    cursor: 'pointer',
+                  },
+                }}
+              >
+                {firstName} {lastName}
+              </Typography>
+              <Typography color={medium}>{friends?.length} friends</Typography>
+            </Box>
+          </FlexBetween>
         </FlexBetween>
-        <ManageAccountsOutlined />
+        {!isNonMobileScreens && (
+          <IconButton onClick={() => setIsMobileMenuToggled((prev) => !prev)}>
+            <AssignmentIndOutlined />
+          </IconButton>
+        )}
       </FlexBetween>
 
       <Divider />
-
-      <Box p="1rem 0">
-        <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
-          <LocationOnOutlined fontSize="large" sx={{ color: main }} />
-          <Typography color={medium}>{location}</Typography>
-        </Box>
-        <Box display="flex" alignItems="center" gap="1rem">
-          <WorkOutlineOutlined fontSize="large" sx={{ color: main }} />
-          <Typography color={medium}>{occupation}</Typography>
-        </Box>
-      </Box>
-      <Divider />
-
-      <Box p="1rem">
-        <FlexBetween mb="0.5rem">
-          <Typography color={medium}>Who&apos;s viwed your profile</Typography>
-          <Typography color={main} fontWeight="500">
-            {viewedProfile}
-          </Typography>
-        </FlexBetween>
-        <FlexBetween>
-          <Typography color={medium}>Impressions of your post</Typography>
-          <Typography color={main} fontWeight="500">
-            {impressions}
-          </Typography>
-        </FlexBetween>
-      </Box>
-      <Divider />
-
-      <Box p="1rem 0">
-        <Typography fontSize="1rem" fontWeight="500" color={main} mb="1rem">
-          Social Profiles
-        </Typography>
-
-        <FlexBetween gap="1rem" mb="0.5rem">
-          <FlexBetween gap="1rem">
-            <img src={Twitter} alt="twitter" />
-            <Box>
-              <Typography color={main} fontWeight="500">
-                Twitter
-              </Typography>
-              <Typography color={medium}>Social Network</Typography>
+      {!isMobileMenuToggled && (
+        <>
+          <Box p="1rem 0">
+            <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
+              <LocationOnOutlined fontSize="large" sx={{ color: main }} />
+              <Typography color={medium}>{location}</Typography>
             </Box>
-          </FlexBetween>
-          <EditOutlined sx={{ color: main }} />
-        </FlexBetween>
-
-        <FlexBetween gap="1rem">
-          <FlexBetween gap="1rem">
-            <img src={LinkedIn} alt="linkedin" />
-            <Box>
-              <Typography color={main} fontWeight="500">
-                LinkedIn
-              </Typography>
-              <Typography color={medium}>Network Platform</Typography>
+            <Box display="flex" alignItems="center" gap="1rem">
+              <WorkOutlineOutlined fontSize="large" sx={{ color: main }} />
+              <Typography color={medium}>{occupation}</Typography>
             </Box>
-          </FlexBetween>
-          <EditOutlined sx={{ color: main }} />
-        </FlexBetween>
-      </Box>
+          </Box>
+          <Divider />
+          <Box p="1rem">
+            <FlexBetween mb="0.5rem">
+              <Typography color={medium}>
+                Who&apos;s viwed your profile
+              </Typography>
+              <Typography color={main} fontWeight="500">
+                {viewedProfile}
+              </Typography>
+            </FlexBetween>
+            <FlexBetween>
+              <Typography color={medium}>Impressions of your post</Typography>
+              <Typography color={main} fontWeight="500">
+                {impressions}
+              </Typography>
+            </FlexBetween>
+          </Box>
+          <Divider />
+          <Box p="1rem 0">
+            <Typography fontSize="1rem" fontWeight="500" color={main} mb="1rem">
+              Social Profiles
+            </Typography>
+
+            <FlexBetween gap="1rem" mb="0.5rem">
+              <FlexBetween gap="1rem">
+                <img src={Twitter} alt="twitter" />
+                <Box>
+                  <Typography color={main} fontWeight="500">
+                    Twitter
+                  </Typography>
+                  <Typography color={medium}>Social Network</Typography>
+                </Box>
+              </FlexBetween>
+              <EditOutlined sx={{ color: main }} />
+            </FlexBetween>
+
+            <FlexBetween gap="1rem">
+              <FlexBetween gap="1rem">
+                <img src={LinkedIn} alt="linkedin" />
+                <Box>
+                  <Typography color={main} fontWeight="500">
+                    LinkedIn
+                  </Typography>
+                  <Typography color={medium}>Network Platform</Typography>
+                </Box>
+              </FlexBetween>
+              <EditOutlined sx={{ color: main }} />
+            </FlexBetween>
+          </Box>
+        </>
+      )}
     </WidgetWrapper>
   );
 };

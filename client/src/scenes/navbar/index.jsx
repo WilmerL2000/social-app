@@ -6,7 +6,6 @@ import {
   Menu,
   Message,
   Notifications,
-  Search,
 } from '@mui/icons-material';
 import {
   Box,
@@ -58,19 +57,6 @@ export default function Navbar() {
         >
           Friendify
         </Typography>
-        {isNonMobileScreens && (
-          <FlexBetween
-            backgroundColor={neutralLight}
-            borderRadius="9px"
-            gap="3rem"
-            padding="0.1rem 1.5rem"
-          >
-            <InputBase placeholder="Search..." />
-            <IconButton>
-              <Search />
-            </IconButton>
-          </FlexBetween>
-        )}
       </FlexBetween>
 
       {/* DESKTOP NAV */}
@@ -85,7 +71,6 @@ export default function Navbar() {
           </IconButton>
           <Message sx={{ fontsize: '25px' }} />
           <Notifications sx={{ fontsize: '25px' }} />{' '}
-          <Help sx={{ fontSize: '25px' }} />
           <FormControl variant="standard" value={fullName}>
             <Select
               value={fullName}
@@ -159,7 +144,6 @@ export default function Navbar() {
             </IconButton>
             <Message sx={{ fontSize: '25px' }} />
             <Notifications sx={{ fontSize: '25px' }} />
-            <Help sx={{ fontSize: '25px' }} />
             <FormControl variant="standard" value={fullName}>
               <Select
                 value={fullName}
