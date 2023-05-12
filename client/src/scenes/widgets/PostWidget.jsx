@@ -67,17 +67,14 @@ const PostWidget = ({
    * the new comment.
    */
   const patchComment = async () => {
-    const response = await fetch(
-      `http://localhost:3001/posts/${postId}/comment`,
-      {
-        method: 'PATCH',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ comment }),
-      }
-    );
+    const response = await fetch(`${BASE_URL}/posts/${postId}/comment`, {
+      method: 'PATCH',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ comment }),
+    });
     setComment('');
     const updatedPost = await response.json();
     dispatch(setPost({ post: updatedPost }));
