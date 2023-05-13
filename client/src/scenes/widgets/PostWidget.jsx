@@ -9,6 +9,7 @@ import {
   Divider,
   IconButton,
   InputBase,
+  Skeleton,
   Typography,
   useTheme,
 } from '@mui/material';
@@ -91,7 +92,9 @@ const PostWidget = ({
       <Typography color={main} sx={{ mt: '1rem' }}>
         {description}
       </Typography>
-      {picturePath && (
+      {!picturePath ? (
+        <Skeleton sx={{ height: 300 }} animation="wave" variant="rectangular" />
+      ) : (
         <img
           width="100%"
           height="auto"
