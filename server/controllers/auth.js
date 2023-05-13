@@ -98,3 +98,39 @@ export const login = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+/**
+ * This is an asynchronous function that updates a user's profile information and returns the updated
+ * user object.
+ * @param req - req stands for request and it is an object that contains information about the HTTP
+ * request that was made, such as the request headers, request parameters, request body, etc.
+ * @param res - `res` is the response object that is sent back to the client after the server has
+ * processed the request. It contains information such as the status code, headers, and response body.
+ * In this case, the `res` object is used to send a JSON response containing the updated user object or
+ * an
+ */
+export const editProfile = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const { firstName, lastName, email, picturePath, location, occupation } =
+      req.body;
+
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      {
+        firstName,
+        lastName,
+        email,
+        picturePath,
+        location,
+        occupation,
+      },
+      { new: true }
+    );
+
+    res.status(201).json(updatedUser);
+  } catch (err) {
+    res.status(409).json({ error: err.message });
+  }
+};

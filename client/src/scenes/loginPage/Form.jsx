@@ -2,6 +2,7 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import {
   Box,
   Button,
+  CircularProgress,
   TextField,
   Typography,
   useMediaQuery,
@@ -16,6 +17,7 @@ import FlexBetween from '../../components/FlexBetween';
 import { loginSchema, registerSchema } from '../../schemas';
 import { setLogin } from '../../store';
 import { BASE_URL } from '../../utils';
+import { toast } from 'react-toastify';
 
 const initialValuesRegister = {
   firstName: '',
@@ -40,19 +42,25 @@ export default function Form() {
   const isNonMobile = useMediaQuery('(min-width:600px)');
   const isLogin = pageType === 'login';
   const isRegister = pageType === 'register';
-
+  const [loading, setLoading] = useState(false);
   /**
    * This function logs in a user by sending a POST request to a server with user credentials, resets
    * the form, and sets the user's login information in the state.
    */
   const login = async (values, onSubmitProps) => {
+    setLoading(true);
     const loggedInResponse = await fetch(`${BASE_URL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(values),
     });
+
     const loggedIn = await loggedInResponse.json();
     onSubmitProps.resetForm();
+
+    if (loggedIn.msg) {
+      toast.error(loggedIn.msg);
+    }
 
     if (loggedIn) {
       dispatch(
@@ -61,6 +69,7 @@ export default function Form() {
           token: loggedIn.token,
         })
       );
+      setLoading(false);
       navigate('/home');
     }
   };
@@ -70,6 +79,7 @@ export default function Form() {
    * resets the form.
    */
   const register = async (values, onSubmitProps) => {
+    setLoading(true);
     // this allows us to send form info with image
     const formData = new FormData();
     for (let value in values) {
@@ -83,7 +93,7 @@ export default function Form() {
     });
     const savedUser = await savedUserResponse.json();
     onSubmitProps.resetForm();
-
+    setLoading(false);
     if (savedUser) {
       setPageType('login');
     }
@@ -228,19 +238,36 @@ export default function Form() {
 
           {/* BUTTONS */}
           <Box>
-            <Button
-              fullwidth
-              type="submit"
-              sx={{
-                m: '2rem 0',
-                p: '1rem',
-                backgroundColor: palette.primary.main,
-                color: palette.background.alt,
-                '&:hover': { color: palette.primary.main },
-              }}
-            >
-              {isLogin ? 'LOGIN' : 'REGISTER'}
-            </Button>
+            <Box sx={{ m: 1, position: 'relative' }}>
+              <Button
+                fullWidth
+                type="submit"
+                sx={{
+                  m: '2rem 0',
+                  p: '1rem',
+                  backgroundColor: palette.primary.main,
+                  color: palette.background.alt,
+                  '&:hover': { color: palette.primary.main },
+                }}
+                disabled={loading}
+              >
+                {isLogin ? 'LOGIN' : 'REGISTER'}
+              </Button>
+              {loading && (
+                <CircularProgress
+                  size={24}
+                  sx={{
+                    position: 'absolute',
+                    color: 'inherit',
+                    top: '50%',
+                    left: '50%',
+                    marginTop: '-12px',
+                    marginLeft: '-12px',
+                  }}
+                />
+              )}
+            </Box>
+
             <Typography
               onClick={() => {
                 setPageType(isLogin ? 'register' : 'login');

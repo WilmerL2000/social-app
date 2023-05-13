@@ -81,6 +81,15 @@ const PostWidget = ({
     dispatch(setPost({ post: updatedPost }));
   };
 
+  /**
+   * The function checks if a double-click event occurred and calls the patchLike function if it did.
+   */
+  const clickHandler = (event) => {
+    if (event.detail == 2) {
+      patchLike();
+    }
+  };
+
   return (
     <WidgetWrapper m={!isProfile ? '2rem 0' : '0 0 2rem 0'}>
       <Friend
@@ -101,6 +110,7 @@ const PostWidget = ({
           alt="post"
           style={{ borderRadius: '0.75rem', marginTop: '0.75rem' }}
           src={`${BASE_URL}/assets/${picturePath}`}
+          onClick={clickHandler}
         />
       )}
       <FlexBetween mt="0.25rem">

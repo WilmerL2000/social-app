@@ -1,7 +1,6 @@
 import {
   Close,
   DarkMode,
-  Help,
   LightMode,
   Menu,
   Message,
@@ -92,6 +91,9 @@ export default function Navbar() {
               <MenuItem value={fullName}>
                 <Typography>{fullName}</Typography>
               </MenuItem>
+              <MenuItem onClick={() => navigate('/edit-profile')}>
+                Edit Profile
+              </MenuItem>
               <MenuItem onClick={() => dispatch(setLogout())}>Log Out</MenuItem>
             </Select>
           </FormControl>
@@ -164,6 +166,9 @@ export default function Navbar() {
               >
                 <MenuItem value={fullName}>
                   <Typography>{fullName}</Typography>
+                </MenuItem>
+                <MenuItem onClick={() => navigate('/edit-profile')}>
+                  Edit Profile
                 </MenuItem>
                 <MenuItem onClick={() => dispatch(setLogout())}>
                   Log Out
