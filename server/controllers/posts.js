@@ -126,9 +126,13 @@ export const commentPost = async (req, res) => {
     const { id } = req.params;
     const { comment } = req.body;
 
-    const updatedPost = await Post.findByIdAndUpdate(id, {
-      $push: { comments: comment },
-    });
+    const updatedPost = await Post.findByIdAndUpdate(
+      id,
+      {
+        $push: { comments: comment },
+      },
+      { new: true }
+    );
 
     res.status(201).json(updatedPost);
   } catch (error) {
