@@ -7,6 +7,9 @@ import HomePage from './scenes/homePage';
 import LoginPage from './scenes/loginPage';
 import ProfilePage from './scenes/profilePage';
 import { themeSettings } from './theme';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import EditProfile from './scenes/editProfilePage';
 
 function App() {
   const mode = useSelector((state) => state.mode);
@@ -30,8 +33,13 @@ function App() {
               path="/profile/:userId"
               element={isAuth ? <ProfilePage /> : <Navigate to="/" />}
             />
+            <Route
+              path="/edit-profile"
+              element={isAuth ? <EditProfile /> : <Navigate to="/" />}
+            />
           </Routes>
         </ThemeProvider>
+        <ToastContainer position="top-center" autoClose={2500} />
       </BrowserRouter>
     </>
   );

@@ -8,7 +8,7 @@ import morgan from 'morgan';
 import multer from 'multer';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { register } from './controllers/auth.js';
+import { editProfile, register } from './controllers/auth.js';
 import { createPost } from './controllers/posts.js';
 import { verifyToken } from './middleware/auth.js';
 import authRoutes from './routes/auth.js';
@@ -108,6 +108,7 @@ const upload = multer({ storage });
 
 // !Routes with files
 app.post('/auth/register', upload.single('picture'), register);
+app.patch('/auth/:id/edit-profile', upload.single('picture'), editProfile);
 app.post('/posts', verifyToken, upload.single('picture'), createPost);
 
 // !Routes
