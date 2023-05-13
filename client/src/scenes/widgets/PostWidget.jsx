@@ -101,13 +101,12 @@ const PostWidget = ({
       <Typography color={main} sx={{ mt: '1rem' }}>
         {description}
       </Typography>
-      {!picturePath ? (
-        <Skeleton sx={{ height: 300 }} animation="wave" variant="rectangular" />
-      ) : (
+      {picturePath && (
         <img
           width="100%"
           height="auto"
           alt="post"
+          loading="lazy"
           style={{ borderRadius: '0.75rem', marginTop: '0.75rem' }}
           src={`${BASE_URL}/assets/${picturePath}`}
           onClick={clickHandler}
@@ -134,7 +133,7 @@ const PostWidget = ({
           </FlexBetween>
         </FlexBetween>
       </FlexBetween>
-      <FlexBetween>
+      <FlexBetween gap="0.5rem">
         <InputBase
           placeholder="What's on your mind..."
           onChange={(e) => setComment(e.target.value)}

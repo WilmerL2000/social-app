@@ -2,11 +2,12 @@ import { Box, useMediaQuery } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import MainPageLayout from '../../components/Layouts/MainPageLayout';
+import UserNotFound from '../../components/UserNotFound';
+import { BASE_URL } from '../../utils';
 import FriendListWidget from '../widgets/FriendListWidget';
 import PostsWidget from '../widgets/PostsWidget';
 import UserWidget from '../widgets/UserWidget';
-import MainPageLayout from '../../components/Layouts/MainPageLayout';
-import { BASE_URL } from '../../utils';
 
 export default function Profile() {
   const [user, setUser] = useState(null);
@@ -25,31 +26,33 @@ export default function Profile() {
 
   useEffect(() => {
     getUser();
-  }, []);
+  }, [userId]);
 
-  if (!user) return null;
+  if (user?.message) return <UserNotFound />;
 
   return (
     <MainPageLayout>
-      <Box
-        width="100%"
-        padding="2rem 6%"
-        display={isNonMobileScreens ? 'flex' : 'block'}
-        gap="2rem"
-        justifyContent="center"
-      >
-        <Box flexBasis={isNonMobileScreens ? '26%' : undefined}>
-          <UserWidget userId={userId} picturePath={user.picturePath} />
-          <Box m="2rem 0" />
-          <FriendListWidget userId={userId} />
-        </Box>
+      {user && (
         <Box
-          flexBasis={isNonMobileScreens ? '42%' : undefined}
-          mt={isNonMobileScreens ? undefined : '2rem'}
+          width="100%"
+          padding="2rem 6%"
+          display={isNonMobileScreens ? 'flex' : 'block'}
+          gap="2rem"
+          justifyContent="center"
         >
-          <PostsWidget userId={userId} isProfile />
+          <Box flexBasis={isNonMobileScreens ? '26%' : undefined}>
+            <UserWidget userId={userId} picturePath={user?.picturePath} />
+            <Box m="2rem 0" />
+            <FriendListWidget userId={userId} />
+          </Box>
+          <Box
+            flexBasis={isNonMobileScreens ? '42%' : undefined}
+            mt={isNonMobileScreens ? undefined : '2rem'}
+          >
+            <PostsWidget userId={userId} isProfile />
+          </Box>
         </Box>
-      </Box>
+      )}
     </MainPageLayout>
   );
 }
