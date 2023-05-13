@@ -22,11 +22,11 @@ function App() {
           <CssBaseline />
           <Routes>
             <Route
-              path="/"
+              path="/*"
               element={!isAuth ? <LoginPage /> : <Navigate to="/home" />}
             />
             <Route
-              path="/home"
+              path={'/home/*'}
               element={isAuth ? <HomePage /> : <Navigate to="/" />}
             />
             <Route
