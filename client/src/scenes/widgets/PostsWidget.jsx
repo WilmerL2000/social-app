@@ -4,12 +4,17 @@ import { setPosts } from '../../store';
 import PostWidget from './PostWidget';
 import { BASE_URL } from '../../utils';
 import PostWidgetSkeleton from '../../components/Skeleton/PostWidgetSkeleton';
+import WidgetWrapper from '../../components/WidgetWrapper';
+import FlexBetween from '../../components/FlexBetween';
+import { Box, Typography, useTheme } from '@mui/material';
 
 const PostsWidget = ({ userId, isProfile = false }) => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts);
   const token = useSelector((state) => state.token);
   const [loading, setLoading] = useState(false);
+  const { palette } = useTheme();
+  const dark = palette.neutral.dark;
 
   /**
    * This function retrieves posts from a server using a GET request and sets them in the state using
@@ -52,7 +57,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
     <>
       {loading ? (
         <PostWidgetSkeleton isProfile={isProfile} />
-      ) : (
+      ) : posts.length ? (
         posts.map(
           ({
             _id,
@@ -81,6 +86,19 @@ const PostsWidget = ({ userId, isProfile = false }) => {
             />
           )
         )
+      ) : (
+        <WidgetWrapper>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            sx={{ mb: '0.5rem' }}
+          >
+            <Typography variant="h4" color={dark} fontWeight="500">
+              No posts
+            </Typography>
+          </Box>
+        </WidgetWrapper>
       )}
     </>
   );
