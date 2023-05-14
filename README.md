@@ -2,8 +2,8 @@
 
 <!-- PROJECT LOGO -->
 <div align="center">
-  <h1 align="center">AI Image Generator</h1>
-    <img src="https://res.cloudinary.com/wils09/image/upload/v1682547402/GitHub/image-generator/main_xsazfq.png" width="100%" >
+  <h1 align="center">Friendify</h1>
+    <img src="https://res.cloudinary.com/wils09/image/upload/v1684015843/GitHub/social-app/home_mj66oc.png" width="100%" >
   <p align="center">
     <a href="https://ai-image-generator-app.vercel.app/" target="_blank">Web Page</a>
   </p>
@@ -45,14 +45,17 @@
 
 ## About The Project
 
-Allows the user to generate an image using a prompt, which is sent to openAI to generate the image and return the image generated with AI.
+This project is developed with MERN Stack, Material UI and other technologies. It allows users to post, like and unlike, as well as add comments and other functions that will be detailed below.
 
 ### Features
 
-- Allows the user to generate an image via AI by providing a description
-- You can share the generated image with other users
-- You can search for images through the description provided
-- Download each image
+- Register and login.
+- Dark mode.
+- Post a picture.
+- Like and unlike the post (double click too).
+- Comment the post.
+- Visit a user's profile and view their profile information and posts.
+- Update profile information.
 
 ### Tech Stack
 
@@ -70,8 +73,12 @@ Allows the user to generate an image using a prompt, which is sent to openAI to 
         <br><strong>React</strong>        
       </td>      
       <td align="center" width="96">
-          <img src="https://res.cloudinary.com/wils09/image/upload/v1682487162/GitHub/assets/file_type_tailwind_icon_130128_mwu7ie.png" width="48" height="48" alt="Tailwind CSS" />
-        <br><strong>Tailwind CSS</strong>        
+          <img src="https://res.cloudinary.com/wils09/image/upload/v1682487162/GitHub/assets/redux_original_logo_icon_146365_kycmj9.png" width="48" height="48" alt="React" />
+        <br><strong>Redux</strong>        
+      </td>      
+      <td align="center" width="96">
+          <img src="https://res.cloudinary.com/wils09/image/upload/v1682487162/GitHub/assets/material_ui_jqpugk.png" width="48" height="48" alt="Material UI" />
+        <br><strong>Material UI</strong>        
       </td>     
       <td align="center" width="96">
           <img src="https://res.cloudinary.com/wils09/image/upload/v1682564470/GitHub/assets/express_jzkx6a.png" width="48" height="48" alt="Express.js" />
@@ -86,12 +93,12 @@ Allows the user to generate an image using a prompt, which is sent to openAI to 
         <br><strong>MongoDB</strong>        
       </td>     
       <td align="center" width="96">
-          <img src="https://res.cloudinary.com/wils09/image/upload/v1682550257/GitHub/assets/openai_wf5jek.png" width="48" height="48" alt="OpenAI" />
-        <br><strong>OpenAI</strong>        
+          <img src="https://res.cloudinary.com/wils09/image/upload/v1684017962/GitHub/assets/jsonwebtoken_m5lgj3.png" width="48" height="48" alt="JWT" />
+        <br><strong>JWT</strong>        
       </td>     
       <td align="center" width="96">
-          <img src="https://res.cloudinary.com/wils09/image/upload/v1682564470/GitHub/assets/cloudinary_sjvklt.png" width="48" height="48" alt="Express.js" />
-        <br><strong>Cloudinary</strong>        
+          <img src="https://res.cloudinary.com/wils09/image/upload/v1684018369/GitHub/assets/formik_ah64vc.png" width="48" height="48" alt="Formik" />
+        <br><strong>Formik</strong>        
       </td>     
     </tr>
      <tr>
@@ -99,13 +106,16 @@ Allows the user to generate an image using a prompt, which is sent to openAI to 
         <br><strong>Version</strong>
       </td>      
       <td align="center" width="96">
-        <br>4.1.0
+        <br>4.3.2
       </td>     
       <td align="center" width="96">
         <br>18.2.0
       </td>     
       <td align="center" width="96">
-        <br>3.2.7
+        <br>8.0.5
+      </td>     
+      <td align="center" width="96">
+        <br>11.10.8
       </td>     
       <td align="center" width="96">
         <br>4.18.2
@@ -117,10 +127,10 @@ Allows the user to generate an image using a prompt, which is sent to openAI to 
         <br>6.0
       </td>     
       <td align="center" width="96">
-        <br>3.2.1
+        <br>9.0.0
       </td>     
       <td align="center" width="96">
-        <br>1.35.0
+        <br>2.2.9
       </td>     
     </tr>
   </table>
@@ -135,12 +145,24 @@ Allows the user to generate an image using a prompt, which is sent to openAI to 
 
 <div align="center">
   <div>
-    <h3>Create & Post Image</h3>
-    <img src="https://res.cloudinary.com/wils09/image/upload/v1682547400/GitHub/image-generator/post_csc9ua.png" width="100%" >
+    <h3>Login</h3>
+    <img src="https://res.cloudinary.com/wils09/image/upload/v1684015834/GitHub/social-app/login_vah4bf.png" width="100%" >
   </div>
   <div>
-    <h3>Search</h3>
-    <img src="https://res.cloudinary.com/wils09/image/upload/v1682547401/GitHub/image-generator/search_uqt9ma.png" width="100%" >
+    <h3>Register</h3>
+    <img src="https://res.cloudinary.com/wils09/image/upload/v1684015834/GitHub/social-app/register_wozy7x.png" width="100%" >
+  </div>
+  <div>
+    <h3>Dark Mode</h3>
+    <img src="https://res.cloudinary.com/wils09/image/upload/v1684015842/GitHub/social-app/dark-mode_nqapau.png" width="100%" >
+  </div>
+  <div>
+    <h3>User Profile</h3>
+    <img src="https://res.cloudinary.com/wils09/image/upload/v1684015843/GitHub/social-app/user-profile_xwbiqd.png" width="100%" >
+  </div>
+  <div>
+    <h3>Update Profile</h3>
+    <img src="https://res.cloudinary.com/wils09/image/upload/v1684015840/GitHub/social-app/edit-profile_rfnwvb.png" width="100%" >
   </div>
 </div>
 
@@ -148,7 +170,13 @@ Allows the user to generate an image using a prompt, which is sent to openAI to 
 
 <div align="center">
   <div>
-    <img src="https://res.cloudinary.com/wils09/image/upload/v1682547728/GitHub/image-generator/mobile_qoemik.png" width="100%" >
+    <img src="https://res.cloudinary.com/wils09/image/upload/v1684017152/GitHub/social-app/mobile1_gbtuo6.png" width="100%" >
+  </div>
+  <div>
+    <img src="https://res.cloudinary.com/wils09/image/upload/v1684017154/GitHub/social-app/mobile2_y1wwni.png" width="100%" >
+  </div>
+  <div>
+    <img src="https://res.cloudinary.com/wils09/image/upload/v1684017152/GitHub/social-app/mobile3_egs56p.png" width="100%" >
   </div>
 </div>
 
@@ -164,21 +192,21 @@ _Follow the instructions below_
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/WilmerL2000/ai-image-generator-app.git
+   git clone https://github.com/WilmerL2000/social-app.git
    ```
 2. Install NPM packages
    ```sh
    npm install
    ```
-3. Get & Enter your API KEY from OPENAI in `.env` file in server folder
+3. Get & Enter your MongoDB connection in `.env` file in server folder
    ```js
    API_KEY = 'ENTER YOUR API';
    ```
-4. Get & Enter your MongoDB connection in `.env` file in server folder
+4. Enter `JWT_SECRET` KEY in `.env` file in server folder (can be any phrase)
    ```js
    API_KEY = 'ENTER YOUR API';
    ```
-5. Get & Enter your API KEYS from Cloudinary in `.env` file in server folder
+5. Enter `PORT` KEY in `.env` file in server folder
    ```js
    API_KEY = 'ENTER YOUR API';
    ```
