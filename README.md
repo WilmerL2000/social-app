@@ -146,11 +146,11 @@ This project is developed with MERN Stack, Material UI and other technologies. I
 <div align="center">
   <div>
     <h3>Login</h3>
-    <img src="https://res.cloudinary.com/wils09/image/upload/v1684015834/GitHub/social-app/login_vah4bf.png" width="100%" >
+    <img src="https://res.cloudinary.com/wils09/image/upload/v1684028824/GitHub/social-app/login_mrexqw.png" width="100%" >
   </div>
   <div>
     <h3>Register</h3>
-    <img src="https://res.cloudinary.com/wils09/image/upload/v1684015834/GitHub/social-app/register_wozy7x.png" width="100%" >
+    <img src="https://res.cloudinary.com/wils09/image/upload/v1684028824/GitHub/social-app/register_yaas9t.png" width="100%" >
   </div>
   <div>
     <h3>Dark Mode</h3>
@@ -170,7 +170,7 @@ This project is developed with MERN Stack, Material UI and other technologies. I
 
 <div align="center">
   <div>
-    <img src="https://res.cloudinary.com/wils09/image/upload/v1684017152/GitHub/social-app/mobile1_gbtuo6.png" width="100%" >
+    <img src="https://res.cloudinary.com/wils09/image/upload/v1684028988/GitHub/social-app/mobile1_x52htb.png" width="100%" >
   </div>
   <div>
     <img src="https://res.cloudinary.com/wils09/image/upload/v1684017154/GitHub/social-app/mobile2_y1wwni.png" width="100%" >
