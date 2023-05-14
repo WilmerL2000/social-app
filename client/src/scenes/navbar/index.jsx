@@ -5,6 +5,7 @@ import {
   Menu,
   Message,
   Notifications,
+  Search,
 } from '@mui/icons-material';
 import {
   Box,
@@ -13,6 +14,7 @@ import {
   InputBase,
   MenuItem,
   Select,
+  Tooltip,
   Typography,
   useMediaQuery,
   useTheme,
@@ -22,6 +24,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import FlexBetween from '../../components/FlexBetween';
 import { setLogout, setMode } from '../../store';
+import Zoom from '@mui/material/Zoom';
 
 export default function Navbar() {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
@@ -61,15 +64,22 @@ export default function Navbar() {
       {/* DESKTOP NAV */}
       {isNonMobileScreens ? (
         <FlexBetween gap="2rem">
-          <IconButton onClick={() => dispatch(setMode())}>
-            {theme.palette.mode === 'dark' ? (
-              <DarkMode sx={{ fontsize: '25px' }} />
-            ) : (
-              <LightMode sx={{ color: dark, fontsize: '25px' }} />
-            )}
-          </IconButton>
+          <Tooltip TransitionComponent={Zoom} arrow title="Theme mode">
+            <IconButton onClick={() => dispatch(setMode())}>
+              {theme.palette.mode === 'dark' ? (
+                <DarkMode sx={{ fontsize: '25px' }} />
+              ) : (
+                <LightMode sx={{ color: dark, fontsize: '25px' }} />
+              )}
+            </IconButton>
+          </Tooltip>
           <Message sx={{ fontsize: '25px' }} />
-          <Notifications sx={{ fontsize: '25px' }} />{' '}
+          <Notifications sx={{ fontsize: '25px' }} />
+          <Tooltip TransitionComponent={Zoom} arrow title="Search">
+            <IconButton onClick={() => navigate('/search')}>
+              <Search sx={{ fontSize: '25px' }} />
+            </IconButton>
+          </Tooltip>
           <FormControl variant="standard" value={fullName}>
             <Select
               value={fullName}
@@ -146,6 +156,9 @@ export default function Navbar() {
             </IconButton>
             <Message sx={{ fontSize: '25px' }} />
             <Notifications sx={{ fontSize: '25px' }} />
+            <IconButton onClick={() => navigate('/search')}>
+              <Search sx={{ fontSize: '25px' }} />
+            </IconButton>
             <FormControl variant="standard" value={fullName}>
               <Select
                 value={fullName}

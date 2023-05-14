@@ -10,6 +10,7 @@ import { themeSettings } from './theme';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import EditProfile from './scenes/editProfilePage';
+import SearchPage from './scenes/searchPage';
 
 function App() {
   const mode = useSelector((state) => state.mode);
@@ -36,6 +37,10 @@ function App() {
             <Route
               path="/edit-profile"
               element={isAuth ? <EditProfile /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/search"
+              element={isAuth ? <SearchPage /> : <Navigate to="/" />}
             />
           </Routes>
         </ThemeProvider>
