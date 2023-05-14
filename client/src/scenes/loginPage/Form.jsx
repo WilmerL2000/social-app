@@ -96,6 +96,7 @@ export default function Form() {
     setLoading(false);
     if (savedUser) {
       setPageType('login');
+      toast.success('Successful registration');
     }
   };
 
