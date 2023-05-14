@@ -5,7 +5,7 @@
   <h1 align="center">Friendify</h1>
     <img src="https://res.cloudinary.com/wils09/image/upload/v1684015843/GitHub/social-app/home_mj66oc.png" width="100%" >
   <p align="center">
-    <a href="https://ai-image-generator-app.vercel.app/" target="_blank">Web Page</a>
+    <a href="https://friendify-w.vercel.app/" target="_blank">Web Page</a>
   </p>
 </div>
 
