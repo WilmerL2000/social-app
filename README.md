@@ -3,7 +3,7 @@
 <!-- PROJECT LOGO -->
 <div align="center">
   <h1 align="center">Friendify</h1>
-    <img src="https://res.cloudinary.com/wils09/image/upload/v1684015843/GitHub/social-app/home_mj66oc.png" width="100%" >
+    <img src="https://res.cloudinary.com/wils09/image/upload/v1684099519/GitHub/social-app/home_uhbloh.png" width="100%" >
   <p align="center">
     <a href="https://friendify-w.vercel.app/" target="_blank">Web Page</a>
   </p>
@@ -55,6 +55,8 @@ This project is developed with MERN Stack, Material UI and other technologies. I
 - Like and unlike the post (double click too).
 - Comment the post.
 - Visit a user's profile and view their profile information and posts.
+- Search users.
+- Add users to friends list.
 - Update profile information.
 
 ### Tech Stack
@@ -154,15 +156,19 @@ This project is developed with MERN Stack, Material UI and other technologies. I
   </div>
   <div>
     <h3>Dark Mode</h3>
-    <img src="https://res.cloudinary.com/wils09/image/upload/v1684015842/GitHub/social-app/dark-mode_nqapau.png" width="100%" >
+    <img src="https://res.cloudinary.com/wils09/image/upload/v1684099519/GitHub/social-app/dark-mode_ovf3fe.png" width="100%" >
   </div>
   <div>
     <h3>User Profile</h3>
-    <img src="https://res.cloudinary.com/wils09/image/upload/v1684015843/GitHub/social-app/user-profile_xwbiqd.png" width="100%" >
+    <img src="https://res.cloudinary.com/wils09/image/upload/v1684099519/GitHub/social-app/user-profile_btjbdq.png" width="100%" >
+  </div>
+  <div>
+    <h3>Search</h3>
+    <img src="https://res.cloudinary.com/wils09/image/upload/v1684098897/GitHub/social-app/search_qdbsap.png" width="100%" >
   </div>
   <div>
     <h3>Update Profile</h3>
-    <img src="https://res.cloudinary.com/wils09/image/upload/v1684015840/GitHub/social-app/edit-profile_rfnwvb.png" width="100%" >
+    <img src="https://res.cloudinary.com/wils09/image/upload/v1684099516/GitHub/social-app/edit-profile_pwmmm0.png" width="100%" >
   </div>
 </div>
 
@@ -176,7 +182,7 @@ This project is developed with MERN Stack, Material UI and other technologies. I
     <img src="https://res.cloudinary.com/wils09/image/upload/v1684017154/GitHub/social-app/mobile2_y1wwni.png" width="100%" >
   </div>
   <div>
-    <img src="https://res.cloudinary.com/wils09/image/upload/v1684017152/GitHub/social-app/mobile3_egs56p.png" width="100%" >
+    <img src="https://res.cloudinary.com/wils09/image/upload/v1684099840/GitHub/social-app/mobile3_ggjxhk.png" width="100%" >
   </div>
 </div>
 
