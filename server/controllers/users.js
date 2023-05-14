@@ -92,3 +92,35 @@ export const addRemoveFriend = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
+
+/**
+ * This is an asynchronous function that retrieves user search data.
+ * @param req - req stands for "request" and it is an object that contains information about the
+ * incoming HTTP request made by the client. It includes information such as the request method,
+ * headers, URL, query parameters, and body. In this specific function, it is likely being used to
+ * extract information from the request to
+ * @param res - The `res` parameter in this code snippet is an object that represents the HTTP response
+ * that will be sent back to the client. It contains methods and properties that allow the server to
+ * send data back to the client, such as `res.send()` to send a response body, `res.status()` to
+ */
+export const getUsersSearch = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const { searchTerm } = req.body;
+
+    const users = await User.find({
+      _id: { $ne: id },
+      $or: [
+        { firstName: { $regex: searchTerm, $options: 'i' } },
+        { lastName: { $regex: searchTerm, $options: 'i' } },
+        { occupation: { $regex: searchTerm, $options: 'i' } },
+        { location: { $regex: searchTerm, $options: 'i' } },
+      ],
+    });
+
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+};

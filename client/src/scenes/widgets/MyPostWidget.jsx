@@ -10,6 +10,7 @@ import {
   Divider,
   IconButton,
   InputBase,
+  Tooltip,
   Typography,
   useTheme,
 } from '@mui/material';
@@ -21,6 +22,7 @@ import UserImage from '../../components/UserImage';
 import WidgetWrapper from '../../components/WidgetWrapper';
 import { setPosts } from '../../store';
 import { BASE_URL } from '../../utils';
+import Zoom from '@mui/material/Zoom';
 
 const MyPostWidget = ({ picturePath }) => {
   const dispatch = useDispatch();
@@ -121,15 +123,16 @@ const MyPostWidget = ({ picturePath }) => {
       <Divider sx={{ margin: '1.25rem 0' }} />
 
       <FlexBetween>
-        <FlexBetween gap="0.25rem" onClick={() => setIsImage(!isImage)}>
-          <ImageOutlined sx={{ color: mediumMain }} />
-          <Typography
-            color={mediumMain}
+        <Tooltip TransitionComponent={Zoom} arrow title="Add picture">
+          <FlexBetween
+            gap="0.25rem"
+            onClick={() => setIsImage(!isImage)}
             sx={{ '&:hover': { cursor: 'pointer', color: medium } }}
           >
-            Image
-          </Typography>
-        </FlexBetween>
+            <ImageOutlined />
+            <Typography>Image</Typography>
+          </FlexBetween>
+        </Tooltip>
         <FlexBetween gap="0.25rem">
           <MoreHorizOutlined sx={{ color: mediumMain }} />
         </FlexBetween>
