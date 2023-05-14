@@ -31,8 +31,8 @@ const SearchWidget = () => {
 
   const { q = '' } = queryString.parse(location.search);
 
-  const [searchText, setSearchText] = useState(q);
-  console.log(q);
+  const [searchText, setSearchText] = useState(q || '');
+
   /**
    * This function handles a search request by sending a POST request to the server with a search term
    * and setting the resulting data to the state.
@@ -49,13 +49,16 @@ const SearchWidget = () => {
       body: JSON.stringify({ searchTerm: searchText }),
     });
     const data = await response.json();
-    console.log(users);
     setUsers(data);
     setLoading(false);
   };
 
   useEffect(() => {
     if (q) handleSearch();
+    if (!q) {
+      setUsers(null);
+      setSearchText('');
+    }
   }, [q]);
 
   return (
@@ -81,7 +84,7 @@ const SearchWidget = () => {
         </IconButton>
       </FlexBetween>
       <Box display="flex" flexDirection="column" gap="1.5rem" p="1rem 0">
-        {!q && (
+        {!q && !loading && (
           <>
             <Divider />
             <Typography
