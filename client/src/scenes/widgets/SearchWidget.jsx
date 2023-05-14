@@ -101,7 +101,7 @@ const SearchWidget = () => {
         )}
         {loading ? (
           <FriendSkeleton />
-        ) : !users?.length ? (
+        ) : !users?.length && q ? (
           <>
             <Divider />
             <Typography
