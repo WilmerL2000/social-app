@@ -33,6 +33,14 @@ const SearchWidget = () => {
 
   const [searchText, setSearchText] = useState(q || '');
 
+  useEffect(() => {
+    if (q) handleSearch();
+    if (!q) {
+      setUsers(null);
+      setSearchText('');
+    }
+  }, [q]);
+
   /**
    * This function handles a search request by sending a POST request to the server with a search term
    * and setting the resulting data to the state.
@@ -53,13 +61,15 @@ const SearchWidget = () => {
     setLoading(false);
   };
 
-  useEffect(() => {
-    if (q) handleSearch();
-    if (!q) {
-      setUsers(null);
-      setSearchText('');
+  /**
+   * The function checks if the "Enter" key is pressed and if a search text is entered, it calls the
+   * handleSearch function.
+   */
+  const handleKeypress = (e) => {
+    if (e.code === 'Enter' && searchText !== '') {
+      handleSearch();
     }
-  }, [q]);
+  };
 
   return (
     <WidgetWrapper>
@@ -78,6 +88,7 @@ const SearchWidget = () => {
           }}
           onChange={(e) => setSearchText(e.target.value)}
           value={searchText}
+          onKeyPress={handleKeypress}
         />
         <IconButton onClick={handleSearch} disabled={!searchText}>
           <Search sx={{ fontSize: '25px' }} />
