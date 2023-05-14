@@ -27,7 +27,7 @@ export const createPost = async (req, res) => {
 
   await newPost.save();
 
-  const post = await Post.find();
+  const post = await Post.find().sort({ createdAt: -1 });
 
   res.status(201).json(post);
 
