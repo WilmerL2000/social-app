@@ -7,6 +7,7 @@ import {
 import {
   Box,
   Button,
+  CircularProgress,
   Divider,
   IconButton,
   InputBase,
@@ -23,6 +24,7 @@ import WidgetWrapper from '../../components/WidgetWrapper';
 import { setPosts } from '../../store';
 import { BASE_URL } from '../../utils';
 import Zoom from '@mui/material/Zoom';
+import { toast } from 'react-toastify';
 
 const MyPostWidget = ({ picturePath }) => {
   const dispatch = useDispatch();
@@ -34,12 +36,14 @@ const MyPostWidget = ({ picturePath }) => {
   const token = useSelector((state) => state.token);
   const mediumMain = palette.neutral.mediumMain;
   const medium = palette.neutral.medium;
+  const [loading, setLoading] = useState(false);
 
   /**
    * This function handles the submission of a post with optional image to a server and updates the
    * state accordingly.
    */
   const handlePost = async () => {
+    setLoading(true);
     const formData = new FormData();
     formData.append('userId', _id);
     formData.append('description', post);
@@ -54,7 +58,11 @@ const MyPostWidget = ({ picturePath }) => {
       body: formData,
     });
     const posts = await response.json();
-    dispatch(setPosts({ posts }));
+    if (posts) {
+      dispatch(setPosts({ posts }));
+      setLoading(false);
+      toast.success('Successfully published');
+    }
     setImage(null);
     setPost('');
     setIsImage((prev) => !prev);
@@ -136,17 +144,32 @@ const MyPostWidget = ({ picturePath }) => {
         <FlexBetween gap="0.25rem">
           <MoreHorizOutlined sx={{ color: mediumMain }} />
         </FlexBetween>
-        <Button
-          disabled={!post || !image}
-          onClick={handlePost}
-          sx={{
-            color: palette.background.alt,
-            backgroundColor: palette.primary.main,
-            borderRadius: '3rem',
-          }}
-        >
-          POST
-        </Button>
+        <Box sx={{ m: 1, position: 'relative' }}>
+          <Button
+            disabled={!post || !image || loading}
+            onClick={handlePost}
+            sx={{
+              color: palette.background.alt,
+              backgroundColor: palette.primary.main,
+              borderRadius: '3rem',
+            }}
+          >
+            POST
+          </Button>
+          {loading && (
+            <CircularProgress
+              size={20}
+              sx={{
+                position: 'absolute',
+                color: 'inherit',
+                top: '50%',
+                left: '50%',
+                marginTop: '-12px',
+                marginLeft: '-12px',
+              }}
+            />
+          )}
+        </Box>
       </FlexBetween>
     </WidgetWrapper>
   );
