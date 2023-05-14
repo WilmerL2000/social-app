@@ -15,6 +15,7 @@ import FlexBetween from '../../components/FlexBetween';
 import Friend from '../../components/Friend';
 import WidgetWrapper from '../../components/WidgetWrapper';
 import { BASE_URL } from '../../utils';
+import FriendSkeleton from '../../components/Skeleton/FriendSkeleton';
 
 const SearchWidget = () => {
   const { _id } = useSelector((state) => state.user);
@@ -22,6 +23,7 @@ const SearchWidget = () => {
   const [users, setUsers] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const theme = useTheme();
   const { palette } = useTheme();
@@ -30,20 +32,26 @@ const SearchWidget = () => {
   const { q = '' } = queryString.parse(location.search);
 
   const [searchText, setSearchText] = useState(q);
-
+  console.log(q);
+  /**
+   * This function handles a search request by sending a POST request to the server with a search term
+   * and setting the resulting data to the state.
+   */
   const handleSearch = async () => {
     navigate(`?q=${searchText}`);
-
+    setLoading(true);
     const response = await fetch(`${BASE_URL}/users/${_id}/search`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ searchTerm: q }),
+      body: JSON.stringify({ searchTerm: searchText }),
     });
     const data = await response.json();
+    console.log(users);
     setUsers(data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -73,7 +81,27 @@ const SearchWidget = () => {
         </IconButton>
       </FlexBetween>
       <Box display="flex" flexDirection="column" gap="1.5rem" p="1rem 0">
-        {!users?.length ? (
+        {!q && (
+          <>
+            <Divider />
+            <Typography
+              color={palette.neutral.dark}
+              variant="h5"
+              fontWeight="500"
+              sx={{
+                mb: '1rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              Search for a user
+            </Typography>
+          </>
+        )}
+        {loading ? (
+          <FriendSkeleton />
+        ) : !users?.length ? (
           <>
             <Divider />
             <Typography
@@ -93,7 +121,7 @@ const SearchWidget = () => {
         ) : (
           users?.map((friend) => (
             <Box key={friend._id}>
-              <Divider />
+              <Divider sx={{ mb: '1rem' }} />
               <Friend
                 friendId={friend._id}
                 name={`${friend.firstName} ${friend.lastName}`}
