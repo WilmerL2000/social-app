@@ -10,28 +10,27 @@ import User from '../models/User.js';
  * response, and `send` to send a plain text response.
  */
 export const createPost = async (req, res) => {
-  const { userId, description, picturePath } = req.body;
-  const user = await User.findById(userId);
-
-  const newPost = new Post({
-    userId,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    location: user.location,
-    description,
-    userPicturePath: user.picturePath,
-    picturePath,
-    likes: {},
-    comments: [],
-  });
-
-  await newPost.save();
-
-  const post = await Post.find().sort({ createdAt: -1 });
-
-  res.status(201).json(post);
-
   try {
+    const { _id, description, picturePath } = req.body;
+    const user = await User.findById(_id);
+
+    const newPost = new Post({
+      userId: _id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      location: user.location,
+      description,
+      userPicturePath: user.picturePath,
+      picturePath,
+      likes: {},
+      comments: [],
+    });
+
+    await newPost.save();
+
+    const post = await Post.find().sort({ createdAt: -1 });
+
+    res.status(201).json(post);
   } catch (error) {
     res.status(409).json({ message: error.message });
   }

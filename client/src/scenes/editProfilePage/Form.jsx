@@ -17,7 +17,7 @@ import FlexBetween from '../../components/FlexBetween';
 import UserImage from '../../components/UserImage';
 import { updateProfileSchema } from '../../schemas';
 import { setUser } from '../../store';
-import { BASE_URL } from '../../utils';
+import { BASE_URL, fileUpload } from '../../utils';
 
 export default function Form() {
   const user = useSelector((state) => state.user);
@@ -32,29 +32,36 @@ export default function Form() {
     return null;
   }
 
-  const handleFormSubmit = async (values) => {
+  /**
+   * This function handles the submission of a form, including uploading a file and sending a PATCH
+   * request to update a user's profile information.
+   */
+  const handleFormSubmit = async (values, onSubmitProps) => {
     setLoading(true);
-    const formData = new FormData();
-    for (let value in values) {
-      formData.append(value, values[value]);
+    let form = { ...values };
+
+    if (values.picture) {
+      const resp = await fileUpload(values.picture);
+      form = { ...values, picturePath: resp };
     }
-    if (values.picture) formData.set('picturePath', values.picture.name);
 
     const response = await fetch(`${BASE_URL}/auth/${user._id}/edit-profile`, {
       method: 'PATCH',
       headers: {
         Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
       },
-      body: formData,
+      body: JSON.stringify({ ...form }),
     });
 
     const updatedUser = await response.json();
-
     updatedUser.error
       ? toast.error(updatedUser.error)
       : toast.success('Profile updated successfully');
 
     if (updatedUser) {
+      onSubmitProps.setFieldValue('picturePath', updatedUser.picturePath);
+      onSubmitProps.setFieldValue('picture', '');
       dispatch(setUser({ user: updatedUser }));
       setLoading(false);
     }

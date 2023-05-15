@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import FlexBetween from '../../components/FlexBetween';
 import { loginSchema, registerSchema } from '../../schemas';
 import { setLogin } from '../../store';
-import { BASE_URL } from '../../utils';
+import { BASE_URL, fileUpload } from '../../utils';
 import { toast } from 'react-toastify';
 
 const initialValuesRegister = {
@@ -80,21 +80,24 @@ export default function Form() {
    */
   const register = async (values, onSubmitProps) => {
     setLoading(true);
-    // this allows us to send form info with image
-    const formData = new FormData();
-    for (let value in values) {
-      formData.append(value, values[value]);
-    }
-    formData.append('picturePath', values.picture.name);
+    let form = { ...values };
+
+    const resp = await fileUpload(values.picture);
+    form = { ...values, picturePath: resp };
 
     const savedUserResponse = await fetch(`${BASE_URL}/auth/register`, {
       method: 'POST',
-      body: formData,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ...form }),
     });
+
     const savedUser = await savedUserResponse.json();
-    onSubmitProps.resetForm();
+
     setLoading(false);
-    if (savedUser) {
+    if (!savedUser.error) {
+      onSubmitProps.resetForm();
       setPageType('login');
       toast.success('Successful registration');
     }

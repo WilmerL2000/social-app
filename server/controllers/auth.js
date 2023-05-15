@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
+import Post from '../models/Post.js';
 
 /**
  * This function registers a new user by hashing their password and saving their data to a database.
@@ -100,14 +101,14 @@ export const login = async (req, res) => {
 };
 
 /**
- * This is an asynchronous function that updates a user's profile information and returns the updated
- * user object.
+ * This function updates a user's profile information and also updates their user picture path in all
+ * of their posts.
  * @param req - req stands for request and it is an object that contains information about the HTTP
  * request that was made, such as the request headers, request parameters, request body, etc.
  * @param res - `res` is the response object that is sent back to the client after the server has
  * processed the request. It contains information such as the status code, headers, and response body.
- * In this case, the `res` object is used to send a JSON response containing the updated user object or
- * an
+ * In this case, the response status code is set to 201 if the request is successful and the updated
+ * user object
  */
 export const editProfile = async (req, res) => {
   try {
@@ -128,6 +129,10 @@ export const editProfile = async (req, res) => {
       },
       { new: true }
     );
+
+    await Post.find({ userId: id }).updateMany({
+      userPicturePath: picturePath,
+    });
 
     res.status(201).json(updatedUser);
   } catch (err) {

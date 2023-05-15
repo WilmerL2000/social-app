@@ -22,49 +22,45 @@ import FlexBetween from '../../components/FlexBetween';
 import UserImage from '../../components/UserImage';
 import WidgetWrapper from '../../components/WidgetWrapper';
 import { setPosts } from '../../store';
-import { BASE_URL } from '../../utils';
+import { BASE_URL, fileUpload } from '../../utils';
 import Zoom from '@mui/material/Zoom';
 import { toast } from 'react-toastify';
 
 const MyPostWidget = ({ picturePath }) => {
   const dispatch = useDispatch();
   const [isImage, setIsImage] = useState(false);
-  const [image, setImage] = useState(null);
-  const [post, setPost] = useState('');
+
   const { palette } = useTheme();
   const { _id } = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const mediumMain = palette.neutral.mediumMain;
   const medium = palette.neutral.medium;
   const [loading, setLoading] = useState(false);
-
+  const [form, setForm] = useState({ _id, picturePath: '', description: '' });
   /**
    * This function handles the submission of a post with optional image to a server and updates the
    * state accordingly.
    */
   const handlePost = async () => {
     setLoading(true);
-    const formData = new FormData();
-    formData.append('userId', _id);
-    formData.append('description', post);
-    if (image) {
-      formData.append('picture', image);
-      formData.append('picturePath', image.name);
-    }
+    const resp = await fileUpload(form.picturePath);
 
     const response = await fetch(`${BASE_URL}/posts`, {
       method: 'POST',
-      headers: { Authorization: `Bearer ${token}` },
-      body: formData,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ...form, picturePath: resp }),
     });
     const posts = await response.json();
+
     if (posts) {
       dispatch(setPosts({ posts }));
       setLoading(false);
       toast.success('Successfully published');
     }
-    setImage(null);
-    setPost('');
+    setForm({ ...form, picturePath: '', description: '' });
     setIsImage((prev) => !prev);
   };
 
@@ -74,8 +70,8 @@ const MyPostWidget = ({ picturePath }) => {
         <UserImage image={picturePath} />
         <InputBase
           placeholder="What's on your mind..."
-          onChange={(e) => setPost(e.target.value)}
-          value={post}
+          onChange={(e) => setForm({ ...form, description: e.target.value })}
+          value={form.description}
           sx={{
             width: '100%',
             backgroundColor: palette.neutral.light,
@@ -94,7 +90,9 @@ const MyPostWidget = ({ picturePath }) => {
           <Dropzone
             acceptedFiles=".jpg,.jpeg,.png"
             multiple={false}
-            onDrop={(acceptedFiles) => setImage(acceptedFiles[0])}
+            onDrop={(acceptedFiles) =>
+              setForm({ ...form, picturePath: acceptedFiles[0] })
+            }
           >
             {({ getRootProps, getInputProps }) => (
               <FlexBetween>
@@ -106,18 +104,18 @@ const MyPostWidget = ({ picturePath }) => {
                   sx={{ '&:hover': { cursor: 'pointer' } }}
                 >
                   <input {...getInputProps()} />
-                  {!image ? (
+                  {!form.picturePath ? (
                     <p>Add Image Here</p>
                   ) : (
                     <FlexBetween>
-                      <Typography>{image.name}</Typography>
+                      <Typography>{form.picturePath.name}</Typography>
                       <EditOutlined />
                     </FlexBetween>
                   )}
                 </Box>
-                {image && (
+                {form.picturePath && (
                   <IconButton
-                    onClick={() => setImage(null)}
+                    onClick={() => setForm({ ...form, picturePath: '' })}
                     sx={{ width: '15%' }}
                   >
                     <DeleteOutlined />
@@ -146,8 +144,8 @@ const MyPostWidget = ({ picturePath }) => {
         </FlexBetween>
         <Box sx={{ m: 1, position: 'relative' }}>
           <Button
-            disabled={!post || !image || loading}
             onClick={handlePost}
+            disabled={!form.description || !form.picturePath || loading}
             sx={{
               color: palette.background.alt,
               backgroundColor: palette.primary.main,

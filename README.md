@@ -45,7 +45,7 @@
 
 ## About The Project
 
-This project is developed with MERN Stack, Material UI and other technologies. It allows users to post, like and unlike, as well as add comments and other functions that will be detailed below.
+This project is developed with MERN Stack, Material UI and other technologies. It allows users to post, like and dislike, as well as add comments and other functions that will be detailed below.
 
 ### Features
 
@@ -126,7 +126,7 @@ This project is developed with MERN Stack, Material UI and other technologies. I
         <br>18.13.0
       </td>     
       <td align="center" width="96">
-        <br>6.0
+        <br>6.0.5
       </td>     
       <td align="center" width="96">
         <br>9.0.0
