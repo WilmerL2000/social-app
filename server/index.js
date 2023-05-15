@@ -5,21 +5,11 @@ import express from 'express';
 import helmet from 'helmet';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
-import multer from 'multer';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { editProfile, register } from './controllers/auth.js';
-import { createPost } from './controllers/posts.js';
-import { verifyToken } from './middleware/auth.js';
 import authRoutes from './routes/auth.js';
 import postRoutes from './routes/posts.js';
 import userRoutes from './routes/users.js';
 
 // !!~ Configuration ~
-
-/* These lines of code are used to get the current directory path of the file being executed. */
-const __fileName = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__fileName);
 
 /* `dotenv.config();` is loading environment variables from a `.env` file into the Node.js process.
 This allows sensitive information such as API keys, database credentials, and other configuration
@@ -32,7 +22,7 @@ const app = express();
 application to receive JSON data in HTTP requests and automatically parse it into a JavaScript
 object that can be used in the application. This middleware is commonly used in Express applications
 to handle JSON data sent in HTTP requests. */
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
 
 /* `app.use(helmet());` is setting the Cross-Origin Resource Policy (CORP) for the application using
 the `helmet` middleware. The `helmet` middleware is a collection of security-related middleware
@@ -75,41 +65,11 @@ CORS middleware is necessary to enable cross-origin requests. The `cors()` funct
 middleware with default options, which allows requests from any origin and with any headers. */
 app.use(cors());
 
-/* `app.use('/assets', express.static(path.join(__dirname, 'public/assets')));` is setting up a static
-file server for the application. It is telling Express to serve any files in the `public/assets`
-directory when a request is made to the `/assets` endpoint. This allows the application to serve
-static assets such as images, stylesheets, and JavaScript files to the client. The
-`path.join(__dirname, 'public/assets')` function is used to construct the absolute path to the
-`public/assets` directory, regardless of the operating system. */
-app.use('/assets', express.static(path.join(__dirname, 'public/assets')));
-
-// !~ File Storage ~
-
-/* This code is setting up a storage engine for the Multer middleware, which is used for handling file
-uploads in the Express application. The `diskStorage` function is used to create a new storage
-engine that saves files to disk. The `destination` function specifies the directory where uploaded
-files will be stored, and the `filename` function specifies the name of the uploaded file. In this
-case, the uploaded file will be saved in the `public/assets` directory with its original name. */
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'public/assets');
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
-
 /* `const upload = multer({ storage });` is setting up a middleware function for handling file uploads
 in the Express application. The `multer` middleware is used to handle `multipart/form-data`
 requests, which are commonly used for file uploads. The `storage` object specifies the storage
 engine to be used for saving uploaded files to disk. The `upload` constant is a reference to the
 middleware function that can be used to handle file uploads in the application. */
-const upload = multer({ storage });
-
-// !Routes with files
-app.post('/auth/register', upload.single('picture'), register);
-app.patch('/auth/:id/edit-profile', upload.single('picture'), editProfile);
-app.post('/posts', verifyToken, upload.single('picture'), createPost);
 
 // !Routes
 app.use('/auth', authRoutes);

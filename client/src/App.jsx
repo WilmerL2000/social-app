@@ -44,7 +44,7 @@ function App() {
             />
           </Routes>
         </ThemeProvider>
-        <ToastContainer position="top-center" autoClose={2500} />
+        <ToastContainer position="bottom-right" autoClose={2500} />
       </BrowserRouter>
     </>
   );

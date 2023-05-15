@@ -1,6 +1,7 @@
 import express from 'express';
 import {
   commentPost,
+  createPost,
   getFeedPost,
   getUserPost,
   likePost,
@@ -13,6 +14,8 @@ const router = express.Router();
 // READ
 router.get('/', verifyToken, getFeedPost);
 router.get('/:userId/posts', verifyToken, getUserPost);
+
+router.post('/', verifyToken, createPost);
 
 // UPDATE
 router.patch('/:id/comment', verifyToken, commentPost);

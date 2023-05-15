@@ -108,7 +108,7 @@ const PostWidget = ({
           alt="post"
           loading="lazy"
           style={{ borderRadius: '0.75rem', marginTop: '0.75rem' }}
-          src={`${BASE_URL}/assets/${picturePath}`}
+          src={picturePath}
           onClick={clickHandler}
         />
       )}
