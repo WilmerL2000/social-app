@@ -34,8 +34,8 @@
       <ul>
         <li><a href="#tech-stack">Tech Stack</a>
           <ul>
-            <li><a href="#desktop">Frontend</a></li>
-            <li><a href="#mobile">Backend</a></li>
+            <li><a href="#frontend">Frontend</a></li>
+            <li><a href="#backend">Backend</a></li>
           </ul>
         </li>
         <li><a href="#features">Features</a></li>
@@ -77,6 +77,8 @@ This project is developed with MERN Stack, Material UI and other technologies. I
 - Update profile information.
 
 ### Tech Stack
+
+### Frontend
 
 <table>
     <tr>
