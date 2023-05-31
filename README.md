@@ -9,6 +9,18 @@
   </p>
 </div>
 
+## Test User
+
+- Email:
+  ```
+   test@gmail.com
+  ```
+- Password:
+  ```
+   Test123
+  ```
+  <br/>
+
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>
@@ -20,7 +32,12 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#tech-stack">Tech Stack</a></li>
+        <li><a href="#tech-stack">Tech Stack</a>
+          <ul>
+            <li><a href="#desktop">Frontend</a></li>
+            <li><a href="#mobile">Backend</a></li>
+          </ul>
+        </li>
         <li><a href="#features">Features</a></li>
       </ul>
     </li>
@@ -75,13 +92,76 @@ This project is developed with MERN Stack, Material UI and other technologies. I
         <br><strong>React</strong>        
       </td>      
       <td align="center" width="96">
+          <img src="https://res.cloudinary.com/wils09/image/upload/v1685557673/GitHub/assets/react-router_kpwvqc.png" width="48" height="48" alt="React Router Dom" />
+        <br><strong>React Router Dom</strong>        
+      </td>   
+      <td align="center" width="96">
           <img src="https://res.cloudinary.com/wils09/image/upload/v1682487162/GitHub/assets/redux_original_logo_icon_146365_kycmj9.png" width="48" height="48" alt="React" />
         <br><strong>Redux</strong>        
       </td>      
+      </td>      
+        <td align="center" width="96">
+          <img src="https://res.cloudinary.com/wils09/image/upload/v1682487162/GitHub/assets/redux_original_logo_icon_146365_kycmj9.png" width="48" height="48" alt="Redux Toolkit" />
+        <br><strong>Redux Toolkit</strong>        
+      </td> 
+      </td>      
+        <td align="center" width="96">
+          <img src="https://res.cloudinary.com/wils09/image/upload/v1682487162/GitHub/assets/redux_original_logo_icon_146365_kycmj9.png" width="48" height="48" alt="Redux Persist" />
+        <br><strong>Redux Persist</strong>        
+      </td> 
       <td align="center" width="96">
           <img src="https://res.cloudinary.com/wils09/image/upload/v1682487162/GitHub/assets/material_ui_jqpugk.png" width="48" height="48" alt="Material UI" />
         <br><strong>Material UI</strong>        
+      </td>
+      <td align="center" width="96">
+          <img src="https://res.cloudinary.com/wils09/image/upload/v1684018369/GitHub/assets/formik_ah64vc.png" width="48" height="48" alt="Formik" />
+        <br><strong>Formik</strong>        
+      </td>
+      <td align="center" width="96">
+          <img src="https://res.cloudinary.com/wils09/image/upload/v1685561154/GitHub/assets/yup_lvnwhs.png" width="48" height="48" alt="Yup" />
+        <br><strong>Yup</strong>        
+      </td>       
+    </tr>
+     <tr>
+      <td align="center" width="96">          
+        <br><strong>Version</strong>
+      </td>      
+      <td align="center" width="96">
+        <br>4.3.2
       </td>     
+      <td align="center" width="96">
+        <br>18.2.0
+      </td>     
+      <td align="center" width="96">
+        <br>6.11.0
+      </td>     
+      <td align="center" width="96">
+        <br>8.0.5
+      </td>     
+      <td align="center" width="96">
+        <br>1.9.5
+      </td>     
+      <td align="center" width="96">
+        <br>6.0.0
+      </td>       
+      <td align="center" width="96">
+        <br>5.12.2
+      </td>     
+      <td align="center" width="96">
+        <br>2.2.9
+      </td>     
+      <td align="center" width="96">
+        <br>1.1.1
+      </td>     
+  </table>
+
+### Backend
+
+<table>
+    <tr>
+      <td align="center" width="96">          
+        <br><strong>Tech</strong>
+      </td>           
       <td align="center" width="96">
           <img src="https://res.cloudinary.com/wils09/image/upload/v1682564470/GitHub/assets/express_jzkx6a.png" width="48" height="48" alt="Express.js" />
         <br><strong>Express.js</strong>        
@@ -99,26 +179,27 @@ This project is developed with MERN Stack, Material UI and other technologies. I
         <br><strong>JWT</strong>        
       </td>     
       <td align="center" width="96">
-          <img src="https://res.cloudinary.com/wils09/image/upload/v1684018369/GitHub/assets/formik_ah64vc.png" width="48" height="48" alt="Formik" />
-        <br><strong>Formik</strong>        
+          <img src="https://res.cloudinary.com/wils09/image/upload/v1685558352/GitHub/assets/dotenv_acghvx.png" width="48" height="48" alt="Dotenv" />
+        <br><strong>Dotenv</strong>        
+      </td>      
+      <td align="center" width="96">
+          <img src="https://res.cloudinary.com/wils09/image/upload/v1685561635/GitHub/assets/nodemon_gjzsok.png" width="48" height="48" alt="Nodemon" />
+        <br><strong>Nodemon</strong>        
+      </td>     
+      <td align="center" width="96">
+        <br><strong>Bcrypt</strong>        
+      </td>     
+      <td align="center" width="96">
+        <br><strong>Cors</strong>        
+      </td>     
+      <td align="center" width="96">
+        <br><strong>Mongoose</strong>        
       </td>     
     </tr>
      <tr>
       <td align="center" width="96">          
         <br><strong>Version</strong>
-      </td>      
-      <td align="center" width="96">
-        <br>4.3.2
-      </td>     
-      <td align="center" width="96">
-        <br>18.2.0
-      </td>     
-      <td align="center" width="96">
-        <br>8.0.5
-      </td>     
-      <td align="center" width="96">
-        <br>11.10.8
-      </td>     
+      </td>        
       <td align="center" width="96">
         <br>4.18.2
       </td>     
@@ -126,14 +207,26 @@ This project is developed with MERN Stack, Material UI and other technologies. I
         <br>18.13.0
       </td>     
       <td align="center" width="96">
-        <br>6.0.5
+        <br>6.0.5	
       </td>     
       <td align="center" width="96">
         <br>9.0.0
       </td>     
       <td align="center" width="96">
-        <br>2.2.9
-      </td>     
+        <br>16.0.3
+      </td>      
+      <td align="center" width="96">
+        <br>2.0.22
+      </td>       
+      <td align="center" width="96">
+        <br>5.1.0
+      </td>       
+      <td align="center" width="96">
+        <br>2.8.5
+      </td>       
+      <td align="center" width="96">
+        <br>7.1.0
+      </td>       
     </tr>
   </table>
 
